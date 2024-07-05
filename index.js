@@ -67,7 +67,7 @@ let dates = [
 ];
 
 function sortEventsByDate(event1, event2) {
-  return event1.date - event2.date;
+  return new Date(event1.date) - new Date(event2.date);
 }
 
 app.get("/events/sort-by-date", (req, res) => {
@@ -94,26 +94,25 @@ app.get("/movies/sort-by-rating", (req, res) => {
   res.json(sortMoviesByRating);
 });
 
-
 // customers/sort-by-last-purchase
 let customers = [
-  {name : "Customer A", lastPurchase : "2024-06-15"},
-  {name : "Customer B", lastPurchase : "2023-07-10"},
-  {name : "Customer C", lastPurchase : "2023-08-05"},
-  {name : "Customer D", lastPurchase : "2023-09-20"},
-  {name : "Customer E", lastPurchase : "2023-10-15"},
+  { name: "Customer A", lastPurchase: "2024-06-15" },
+  { name: "Customer B", lastPurchase: "2023-07-10" },
+  { name: "Customer C", lastPurchase: "2023-08-05" },
+  { name: "Customer D", lastPurchase: "2023-09-20" },
+  { name: "Customer E", lastPurchase: "2023-10-15" },
 ];
 
-function sortCustomersByLastPurchase(cust1, cust2){
+function sortCustomersByLastPurchase(cust1, cust2) {
   return cust2.lastPurchase - cust1.lastPurchase;
 }
 
-app.get('/customers/sort-by-last-purchase',(req,res)=>{
+app.get("/customers/sort-by-last-purchase", (req, res) => {
   let sortedCustomers = customers.slice();
-  sortCustomers.sort(sortCustomersByLastPurchase)
-  res.json(sortedCustomers)
-})
+  sortedCustomers.sort(sortCustomersByLastPurchase);
+  res.json(sortedCustomers);
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`app listening on port ${port}`);
 });
