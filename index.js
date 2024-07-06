@@ -89,9 +89,9 @@ function sortMoviesByRating(movie1, movie2) {
   return movie2.rating - movie1.rating;
 }
 app.get("/movies/sort-by-rating", (req, res) => {
-  let sortedMovies = movies.slice();
-  sortedMovies.sort(sortMoviesByRating);
-  res.json(sortMoviesByRating);
+  let copyMovies = movies.slice();
+  copyMovies.sort(sortMoviesByRating);
+  res.json(copyMovies);
 });
 
 // customers/sort-by-last-purchase
@@ -104,7 +104,7 @@ let customers = [
 ];
 
 function sortCustomersByLastPurchase(cust1, cust2) {
-  return cust2.lastPurchase - cust1.lastPurchase;
+  return new Date(cust2.lastPurchase) - new Date(cust1.lastPurchase);
 }
 
 app.get("/customers/sort-by-last-purchase", (req, res) => {
